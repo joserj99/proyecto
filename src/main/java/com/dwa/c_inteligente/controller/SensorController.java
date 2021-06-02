@@ -43,7 +43,7 @@ public class SensorController {
 	@Autowired
 	private RepoSensor3 repoSensor3;
 	
-	@GetMapping(path = {"/sitio/index", "/"})
+	@GetMapping(path = {"sitio/index", "/"})
 	public String validar(Model modelo, @ModelAttribute Sensor s, HttpServletRequest request) {
 		Iterable<Sensor> sensores = servicioSensor.verTodos();
 		Iterable<Sensor2> sensores2 = servicioSensor2.verTodos();
