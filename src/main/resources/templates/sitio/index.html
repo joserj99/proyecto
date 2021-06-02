@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+	crossorigin="anonymous">
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div th:replace="/Layout :: navbar"></div>
+
+	<div class="container">
+		<br />
+		<style>
+.bg-jumbotron {
+	background-image: url(/img/imagen4.jpg);
+	background-size: cover;
+	background-position: 40%;
+	height: 45vh;
+}
+</style>
+
+		<div
+			class="jumbotron bg-jumbotron d-flex flex-column justify-content-center align-items-center text-white text-center">
+			<h1 class="display-3 text-capitalize w-75"
+				style="text-decoration: underline; font-weight: 900; text-shadow: -2px -2px 1px #000, 2px 2px 1px #000, -2px 2px 1px #000, 2px -2px 1px #000;">
+				Bienvenidos</h1>
+			<h3
+				class="d-flex flex-column justify-content-center align-items-center text-white text-center"
+				style="text-shadow: -2px -2px 1px #000, 2px 2px 1px #000, -2px 2px 1px #000, 2px -2px 1px #000;">
+				Aqui te mostramos la temperatura promedio de la población en general
+				de tres ciudades del estado de puebla</h3>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4">
+					<h3 style="font-weight: 900; text-align: center">Zacatlán</h3>
+
+					<div>
+						<h1 class="justify-content-center align-items-center text-center"
+							style="font-size: 100px; font-family: 'Agency FB'"
+							th:text="${total}"></h1>
+					</div>
+
+					<div class="justify-content-center align-items-center text-center"
+						style="font-size: 100px; font-family: 'Agency FB'"
+						id="contenidotabla2"></div>
+					<p align="justify">Filtros sanitarios de seguridad, cierre de
+						espacios públicos y atractivos turísticos y el llamado de no
+						visitar Zacatlán es la estrategia para reducir el riesgo de
+						contagios de coronavirus que implementa la actual administración
+						municipal, de acuerdo a información oficial; mientras tanto, para
+						la Secretaría de Salud federal, por primera vez en lo que va de la
+						pandemia, Zacatlán rebasa significativamente a Chignahuapan en el
+						número de casos oficiales.</p>
+					<button class="btn btn-success btnCargar" id="btnCargar">
+						Ver datos</button>
+				</div>
+
+				<div class="col-sm-4">
+					<h3 style="font-weight: 900; text-align: center">Chignahuapan</h3>
+
+					<div>
+						<h1 class="justify-content-center align-items-center text-center"
+							style="font-size: 100px; font-family: 'Agency FB'"
+							th:text="${total2}"></h1>
+					</div>
+
+					<div class="justify-content-center align-items-center text-center"
+						style="font-size: 100px; font-family: 'Agency FB'"
+						id="contenidotabla3_2"></div>
+					<p align="justify">En Chignahuapan se lo han tomado sumamente
+						en serio y siguen las medidas sugeridas para evitar contagios al
+						pie de la letra. Así fue como se cerraron los balnearios de aguas
+						termales que le han dado fama nacional a este municipio, las
+						visitas a los bosques y fábricas de sidras y esferas, otros de los
+						productos harto conocidos.</p>
+					<button class="btn btn-success btnCargar2" id="btnCargar2">
+						Ver datos</button>
+				</div>
+
+				<div class="col-sm-4">
+					<h3 style="font-weight: 900; text-align: center">Huauchinango</h3>
+
+					<div>
+						<h1 class="justify-content-center align-items-center text-center"
+							style="font-size: 100px; font-family: 'Agency FB'"
+							th:text="${total3}"></h1>
+					</div>
+
+					<div class="justify-content-center align-items-center text-center"
+						style="font-size: 100px; font-family: 'Agency FB'"
+						id="contenidotabla4_2"></div>
+					<p align="justify">Ante la demanda de atención hospitalaria
+						para los pacientes de covid-19, el gobernador Miguel Barbosa
+						indicó que el Hospital General de Huauchinango será reconvertido
+						parcialmente para combatir el virus en esa región.</p>
+					<button class="btn btn-success btnCargar3" id="btnCargar3">
+						Ver datos</button>
+				</div>
+			</div>
+
+		</div>
+
+
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<h3 style="font-weight: 900; text-align: center; font-size: 50px">Registros</h3>
+					<p align="justify">En el siguiente apartado podrá observar las
+						tablas de registros que se llevaron a cabo por cada ciudad, el
+						promedio se obtuvo por la cantidad de dichos registros
+						actualizados, de esa forma podra enterarse sobre el estado actual
+						de la ciudad.</p>
+
+					<div class="container mt-5">
+						<div class="row">
+							<h3 style="font-weight: 900; text-align: center">Zacatlán</h3>
+							<table class="table">
+							<thead>
+								<tr>
+									<th>Id</th>
+									<th>Temperatura corporal</th>
+									<th>Temperatura ambiental</th>
+									<th>Fecha</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="sensor:${sensores}">
+									<td th:text="${sensor.id}"></td>
+									<td th:text="${sensor.tcorporal}"></td>
+									<td th:text="${sensor.tambiente}"></td>
+									<td th:text="${sensor.fecha}"></td>
+								</tr>
+							</tbody>
+						</table>
+						</div>
+					</div>
+
+					<div class="container mt-5">
+						<div class="row">
+							<h3 style="font-weight: 900; text-align: center">Chignahuapan</h3>
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th scope="col">#</th>
+										<th scope="col">Temperatura corporal</th>
+										<th scope="col">Temperatura ambiental</th>
+										<th scope="col">Fecha</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="sensor:${sensores2}">
+										<td th:text="${sensor.id}"></td>
+										<td th:text="${sensor.tcorporal}"></td>
+										<td th:text="${sensor.tambiente}"></td>
+										<td th:text="${sensor.fecha}"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<div class="container mt-5">
+						<div class="row">
+							<h3 style="font-weight: 900; text-align: center">Huauchinango</h3>
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th scope="col">#</th>
+										<th scope="col">Temperatura corporal</th>
+										<th scope="col">Temperatura ambiental</th>
+										<th scope="col">Fecha</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="sensor:${sensores3}">
+										<td th:text="${sensor.id}"></td>
+										<td th:text="${sensor.tcorporal}"></td>
+										<td th:text="${sensor.tambiente}"></td>
+										<td th:text="${sensor.fecha}"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+		<div class="row">
+			<div class="col-sm-12 text-center">
+				<h3 style="text-align: left; font-weight: 900;">
+					<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+						fill="currentColor" class="bi bi-chat-square-dots-fill"
+						viewBox="0 0 16 16">
+                                <path
+							d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.5a1 1 0 0 0-.8.4l-1.9 2.533a1 1 0 0 1-1.6 0L5.3 12.4a1 1 0 0 0-.8-.4H2a2 2 0 0 1-2-2V2zm5 4a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                            </svg>
+					Comentarios
+				</h3>
+				<p style="text-align: left">Comentanos que tal te a parecido el
+					sitio</p>
+
+				<div id="disqus_thread"></div>
+				<script>
+                            (function () {
+                                var d = document,
+                                    s = d.createElement("script");
+                                s.src = "https://comentarios-aupv3sosua.disqus.com/embed.js";
+                                s.setAttribute("data-timestamp", +new Date());
+                                (d.head || d.body).appendChild(s);
+                            })();
+                        </script>
+				<noscript>
+					Please enable JavaScript to view the <a
+						href="https://disqus.com/?ref_noscript">comments powered by
+						Disqus.</a>
+				</noscript>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
